@@ -8,14 +8,14 @@ using UnityEngine.SceneManagement;
 public class CharacterMovement : MonoBehaviour
 {
     public float Charge = 100;
-    [SerializeField] int battery = 0;
-    [SerializeField] bool hasKey = false;
+    public int battery = 0;
+   public bool hasKey = false;
     bool unlockGate = false;
 
     [Header("Character Traits")]
 
     [Tooltip("Karakterin hýzýdýr.")] public float speed;
-
+   
     
 
     [Header("Move Direction")]
@@ -72,21 +72,12 @@ public class CharacterMovement : MonoBehaviour
     {
         float moveZ = Input.GetAxis("Vertical"); //W-S
         float moveX = Input.GetAxis("Horizontal");//A-D
-        /* moveDirection = new Vector3(moveX * movementSpeed * Time.deltaTime, 0, moveZ * movementSpeed * Time.deltaTime);
-         transform.position += moveDirection;*/
+        
         moveDirection = (transform.forward * moveZ + transform.right * moveX).normalized;
         transform.position += moveDirection * movementSpeed * Time.deltaTime;
     }
    
-    /*  IEnumerator Rutin()
-      {
-          canDegeri = 100;
-
-          yield return new WaitForSeconds(3f);
-          canDegeri = 50;
-          yield return new WaitForSeconds(5f);
-          canDegeri = 100;
-      }*/
+    
     private void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Gate"))
