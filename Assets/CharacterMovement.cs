@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     public int battery = 0;
    public bool hasKey = false;
     bool unlockGate = false;
+    private CharacterController controller;
 
     [Header("Character Traits")]
 
@@ -31,7 +32,8 @@ public class CharacterMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-       // StartCoroutine(Rutin());
+        // StartCoroutine(Rutin());
+        controller = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -74,7 +76,7 @@ public class CharacterMovement : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");//A-D
         
         moveDirection = (transform.forward * moveZ + transform.right * moveX).normalized;
-        transform.position += moveDirection * movementSpeed * Time.deltaTime;
+        controller.Move(moveDirection * movementSpeed * Time.deltaTime);
     }
    
     
@@ -112,5 +114,6 @@ public class CharacterMovement : MonoBehaviour
             }
         }
     }
+   
 
 }

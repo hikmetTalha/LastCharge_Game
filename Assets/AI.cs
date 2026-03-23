@@ -19,6 +19,8 @@ public class AI : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 lastSeenPosition;
     private bool isSearching = false;
+    private float damageCoolDown = 1.0f;
+    private float lastDamageTime;
     void Start()
     {
         navMesh = GetComponent<NavMeshAgent>();
@@ -101,20 +103,7 @@ public class AI : MonoBehaviour
         }
         isSearching = false;
     }
-    /* void FixedUpdate()
-     {
-         RaycastHit hit;
-         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-         if(Physics.Raycast(ray,out hit))
-         {
-             if (Input.GetMouseButtonDown(0))
-             {
-                 navMesh.SetDestination(hit.point);
-           GameObject createdCube = Instantiate(cubePrefab, hit.point, transform.rotation);
-             Destroy(createdCube, 3f);
-             }
-         }
-     }*/
+    
 
     private void OnDrawGizmos()
     {
@@ -128,13 +117,27 @@ public class AI : MonoBehaviour
         Gizmos.DrawRay(transform.position, leftBoundary * lookDistance);
         Gizmos.DrawRay(transform.position, rightBoundary * lookDistance);
     }
-    private void OnCollisionEnter(Collision col)
+    
+    private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("Player")) //Çarptýðý objenin tagi Playersa þunu þunu yap.
-        {
-            col.gameObject.GetComponent<CharacterMovement>().Charge -= 30.0f;
 
+        // 1. Tag kontrolü
+        if (col.CompareTag("Player"))
+        {
+            // 2. Bekleme süresi kontrolü (Zamaný gelmediyse hasar verme)
+            if (Time.time >= lastDamageTime + damageCoolDown)
+            {
+                CharacterMovement player = col.gameObject.GetComponent<CharacterMovement>();
+
+                if (player != null)
+                {
+                    player.Charge -= 30.0f; // Þimdi tam 30 gidecek
+                    lastDamageTime = Time.time; // Son hasar zamanýný güncelle
+                    
+                }
+            }
         }
     }
+
 
 }
