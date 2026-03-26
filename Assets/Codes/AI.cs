@@ -19,14 +19,16 @@ public class AI : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 lastSeenPosition;
     private bool isSearching = false;
-    private float damageCoolDown = 1.0f;
-    private float lastDamageTime;
+    private bool isAttacking = false;
+    private Animator anim;
+   
     void Start()
     {
         navMesh = GetComponent<NavMeshAgent>();
         Target = GameObject.FindWithTag("Player").transform;
         startPosition = transform.position;
         lastSeenPosition = transform.position;
+        anim = GetComponent<Animator>();
     }
     bool CanSeePlayer()
     {
@@ -60,11 +62,16 @@ public class AI : MonoBehaviour
             StopAllCoroutines();
             lastSeenPosition = Target.position;
             navMesh.SetDestination(Target.position);
+            navMesh.isStopped = false;
+            navMesh.SetDestination(Target.position);
+            anim.SetFloat("speed", 1f);
             transform.LookAt(new Vector3(Target.position.x, transform.position.y, Target.position.z));
         }
         else
         {
-         if(currentState == AIState.Chase)
+            if (navMesh.velocity.magnitude > 0.1f) anim.SetFloat("speed", 0.5f);
+            else anim.SetFloat("speed", 0f);
+            if (currentState == AIState.Chase)
             {
                 if (Vector3.Distance(transform.position, lastSeenPosition) > 1.2f)
                 {
@@ -117,27 +124,20 @@ public class AI : MonoBehaviour
         Gizmos.DrawRay(transform.position, leftBoundary * lookDistance);
         Gizmos.DrawRay(transform.position, rightBoundary * lookDistance);
     }
-    
-    private void OnTriggerEnter(Collider col)
+
+    private void OnTriggerEnter(Collider other)
     {
-
-        // 1. Tag kontrolü
-        if (col.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isAttacking)
         {
-            // 2. Bekleme süresi kontrolü (Zamaný gelmediyse hasar verme)
-            if (Time.time >= lastDamageTime + damageCoolDown)
-            {
-                CharacterMovement player = col.gameObject.GetComponent<CharacterMovement>();
-
-                if (player != null)
-                {
-                    player.Charge -= 30.0f; // Þimdi tam 30 gidecek
-                    lastDamageTime = Time.time; // Son hasar zamanýný güncelle
-                    
-                }
-            }
+            StartCoroutine(AttackCoolDown());
         }
     }
-
+    IEnumerator AttackCoolDown()
+    {
+        isAttacking = true;
+        anim.SetTrigger("isAttack");
+        yield return new WaitForSeconds(1f);
+        isAttacking = false;
+    }
 
 }

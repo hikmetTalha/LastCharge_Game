@@ -255,6 +255,27 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &10673289
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10673287}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b795aac2b1ba1ad4eb83cb50bcfc8622, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &107074692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,6 +1029,27 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &1408719411
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408719409}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04b1f06e977b06f4d8aabe48967554d9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1543570525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1079,6 +1121,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2075635641881045398, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1627910548}
+    - targetCorrespondingSourceObject: {fileID: 2075635641881045398, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627910549}
   m_SourcePrefab: {fileID: 100100000, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
 --- !u!1 &1627910547 stripped
 GameObject:
@@ -1111,6 +1156,27 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &1627910549
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627910547}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04b1f06e977b06f4d8aabe48967554d9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1631027270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,6 +1725,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2075635641881045398, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1408719410}
+    - targetCorrespondingSourceObject: {fileID: 2075635641881045398, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1408719411}
   m_SourcePrefab: {fileID: 100100000, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
 --- !u!1001 &6635668740276099873
 PrefabInstance:
@@ -1888,13 +1957,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 6.4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2091867041165055143, guid: db82a8171e7d83045b3b71e729aeb4c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1900215151145389668, guid: db82a8171e7d83045b3b71e729aeb4c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 10673288}
+    - targetCorrespondingSourceObject: {fileID: 1900215151145389668, guid: db82a8171e7d83045b3b71e729aeb4c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 10673289}
   m_SourcePrefab: {fileID: 100100000, guid: db82a8171e7d83045b3b71e729aeb4c1, type: 3}
 --- !u!1001 &8488994001643559990
 PrefabInstance:

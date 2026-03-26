@@ -12,6 +12,9 @@ public class CharacterMovement : MonoBehaviour
    public bool hasKey = false;
     bool unlockGate = false;
     private CharacterController controller;
+    private Animator anim;
+    private bool isDead = false;
+    private bool canTakeDamage = true;
 
     [Header("Character Traits")]
 
@@ -34,10 +37,12 @@ public class CharacterMovement : MonoBehaviour
         cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         // StartCoroutine(Rutin());
         controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
+        if (isDead) return;
         #region MOVEMENT_PART
         Charge -= 2f*Time.deltaTime;
         speed = Mathf.Clamp(speed , 10f, 15f);
@@ -56,6 +61,8 @@ public class CharacterMovement : MonoBehaviour
              StartCoroutine(Rutin());
          }*/
         #endregion
+        bool isWalking = (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0);
+        anim.SetFloat("speed", isWalking ? 1f : 0f);
         if(unlockGate == true && Input.GetKeyDown(KeyCode.E))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -65,15 +72,15 @@ public class CharacterMovement : MonoBehaviour
         {
             unlockGate = true;
         }
-        if( Charge <= 0)
+        if (Charge <= 0 && !isDead)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            StartCoroutine(DeathRoutine());
         }
     }
     void Movement(float movementSpeed)
     {
-        float moveZ = Input.GetAxis("Vertical"); //W-S
-        float moveX = Input.GetAxis("Horizontal");//A-D
+        float moveZ = Input.GetAxis("Vertical"); 
+        float moveX = Input.GetAxis("Horizontal");
         
         moveDirection = (transform.forward * moveZ + transform.right * moveX).normalized;
         controller.Move(moveDirection * movementSpeed * Time.deltaTime);
@@ -82,6 +89,7 @@ public class CharacterMovement : MonoBehaviour
     
     private void OnTriggerEnter(Collider col)
     {
+        if (isDead) return;
         if (col.CompareTag("Gate"))
         {
             
@@ -89,6 +97,10 @@ public class CharacterMovement : MonoBehaviour
             {
                 unlockGate = true;
             }
+        }
+        if (col.CompareTag("AI") && canTakeDamage)
+        {
+            StartCoroutine(TakeDamageRoutine());
         }
         if (col.CompareTag("Battery"))
         {
@@ -101,6 +113,14 @@ public class CharacterMovement : MonoBehaviour
             hasKey = true;
             Destroy(col.gameObject);
         }
+
+    }
+    IEnumerator DeathRoutine()
+    {
+        isDead = true;
+        anim.SetBool("isDead", true);
+        yield return new WaitForSeconds(2.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     private void OnTriggerExit(Collider col)
 
@@ -114,6 +134,14 @@ public class CharacterMovement : MonoBehaviour
             }
         }
     }
-   
 
+    IEnumerator TakeDamageRoutine()
+    {
+        canTakeDamage = false; 
+        Charge -= 30f;
+        anim.SetTrigger("isGetHit");
+
+        yield return new WaitForSeconds(1.0f); 
+        canTakeDamage = true; 
+    }
 }
