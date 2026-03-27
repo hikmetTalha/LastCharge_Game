@@ -7,12 +7,14 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     
-    public void PlayGame(int sceneIndex)
+    public void PlayGame()
     {
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene("Level_01");
     }
     public void ExitGame()
     {
         Application.Quit();
+        Debug.Log("Oyundan çýkýldý.");
     }
+
 }

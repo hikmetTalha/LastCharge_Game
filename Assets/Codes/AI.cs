@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.AI; //NavMesh Componentlarýna eriþmemizi saðlar.
+using UnityEngine.AI; 
 
 
 public class AI : MonoBehaviour
@@ -26,12 +25,15 @@ public class AI : MonoBehaviour
     {
         navMesh = GetComponent<NavMeshAgent>();
         Target = GameObject.FindWithTag("Player").transform;
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null) Target = playerObj.transform;
         startPosition = transform.position;
         lastSeenPosition = transform.position;
         anim = GetComponent<Animator>();
     }
     bool CanSeePlayer()
     {
+        if (Target == null) return false;
         float distance = Vector3.Distance(transform.position, Target.position);
         if(distance <= lookDistance)
         {
@@ -55,6 +57,7 @@ public class AI : MonoBehaviour
 
     void Update()
     {
+        if (Target == null) return;
         if (CanSeePlayer())
         {
             currentState = AIState.Chase;
@@ -77,7 +80,7 @@ public class AI : MonoBehaviour
                 {
                     navMesh.SetDestination(lastSeenPosition);
                 }
-                else
+                else if (!isSearching)
                 {
                     currentState = AIState.Search;
                     StartCoroutine(SearchAndReturn());
@@ -113,11 +116,9 @@ public class AI : MonoBehaviour
     
 
     private void OnDrawGizmos()
-    {
-        //MESAFE DAÝRESÝ
+    { 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, lookDistance);
-        //GÖRÜÞ HUNÝSÝ
         Gizmos.color = Color.red;
         Vector3 leftBoundary = Quaternion.Euler(0, -viewAngle / 2, 0) * transform.forward;
         Vector3 rightBoundary = Quaternion.Euler(0, viewAngle / 2, 0) * transform.forward;
