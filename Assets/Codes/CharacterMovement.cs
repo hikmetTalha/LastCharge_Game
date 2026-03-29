@@ -19,8 +19,12 @@ public class CharacterMovement : MonoBehaviour
     [Header("Character Traits")]
 
     [Tooltip("Karakterin hýzýdýr.")] public float speed;
-   
-    
+   public AudioClip robotDeath;
+   public AudioClip robotStep;
+   public AudioClip getKey;
+   public AudioClip doorOpen;
+   public AudioSource SFXsource;
+
 
     [Header("Move Direction")]
 
@@ -38,34 +42,41 @@ public class CharacterMovement : MonoBehaviour
         // StartCoroutine(Rutin());
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        SFXsource = GetComponent<AudioSource>();
     }
 
     void Update()
+  
     {
         if (isDead) return;
         #region MOVEMENT_PART
         Charge -= 2f*Time.deltaTime;
         speed = Mathf.Clamp(speed , 10f, 15f);
         Movement(speed);
-       
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed += 0.1f * Time.deltaTime;
-        }
-        else
-        {
-            speed -= 0.1f * Time.deltaTime;
-        }
-        /* if (Input.GetKeyDown(KeyCode.E))
-         {
-             StartCoroutine(Rutin());
-         }*/
+      
+      
         #endregion
         bool isWalking = (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0);
         anim.SetFloat("speed", isWalking ? 1f : 0f);
-        if(unlockGate == true && Input.GetKeyDown(KeyCode.E))
+        if (isWalking)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (!SFXsource.isPlaying && robotStep != null)
+            {
+                SFXsource.clip = robotStep;
+                SFXsource.loop = true;
+                SFXsource.Play();
+            }
+        }
+        else
+        {
+            if (SFXsource.isPlaying && SFXsource.clip == robotStep)
+            {
+                SFXsource.Stop();
+            }
+        }
+        if (unlockGate == true && Input.GetKeyDown(KeyCode.E))
+        {
+            StartCoroutine(OpenDoorRoutine());
         }
         Charge = Mathf.Clamp(Charge, 0, 100);
         if(hasKey == true && battery >= 3)
@@ -84,6 +95,16 @@ public class CharacterMovement : MonoBehaviour
         
         moveDirection = (transform.forward * moveZ + transform.right * moveX).normalized;
         controller.Move(moveDirection * movementSpeed * Time.deltaTime);
+        
+    }
+
+    public void PlayFootstep()
+    {
+
+        if (!isDead && robotStep != null)
+        {
+            SFXsource.PlayOneShot(robotStep);
+        }
     }
    
     
@@ -107,18 +128,33 @@ public class CharacterMovement : MonoBehaviour
             battery ++;
             Destroy(col.gameObject);
            Charge += 15f;
+           
         }
+       
         if (col.CompareTag("Key"))
         {
             hasKey = true;
             Destroy(col.gameObject);
+
+            if (SFXsource.clip == robotStep)
+            {
+                SFXsource.Stop();
+            }
+
+            SFXsource.PlayOneShot(getKey);
         }
+        
 
     }
     IEnumerator DeathRoutine()
     {
         isDead = true;
         anim.SetBool("isDead", true);
+        if (SFXsource.isPlaying && SFXsource.clip == robotStep)
+        {
+            SFXsource.Stop();
+        }
+        SFXsource.PlayOneShot(robotDeath);
         yield return new WaitForSeconds(2.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -143,5 +179,19 @@ public class CharacterMovement : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f); 
         canTakeDamage = true; 
+    }
+
+    IEnumerator OpenDoorRoutine()
+    {
+        if (SFXsource.isPlaying && SFXsource.clip == robotStep)
+        {
+            SFXsource.Stop();
+        }
+        if (doorOpen != null)
+        {
+            SFXsource.PlayOneShot(doorOpen);
+        }
+        yield return new WaitForSeconds(1.5f);      
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
