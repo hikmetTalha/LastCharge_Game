@@ -1,17 +1,24 @@
-# Last Charge
+LAST CHARGE 🔋🤖
+Last Charge is an atmospheric survival game where a robot trapped in an abandoned facility tries to find a way to escape before its energy runs out. This project is the first step and the first completed project of my game development journey.
 
-**Last Charge** is a tense survival-action game currently in development. You are trapped in a facility where energy is your only lifeline.
+Game Guide and Controls
+Basic Mechanics
+Race Against Time: Your robot's charge decreases over time. Speed ​​is key to survival!
 
-## 🕹️ Current Mechanics (What's in the game now)
-* **Battery System:** Your energy level is constantly tracked.
-* **AI Vision & Patrol:** Enemies patrol the area and can detect the player using a Field of View (FOV) system.
-* **Core Loop:** Starting with a set amount of energy and trying to navigate through the level.
+Enemy Threat: Contact with enemy robots quickly drains your battery.
 
-## 🛠️ Planned Features (Coming Soon)
+Objective: Find the 3 batteries and the special key hidden in the facility to escape.
 
-* **Dark Atmosphere:** Detailed lighting and shadows to enhance the stealth experience.
-* **Level Objectives:** Keys and interactive objects to open the final exit.
+Controls
+Movement: W, A, S, D keys.
 
-## 🚀 How it Starts & Ends
-* **Start:** You begin at the spawn point with 100% battery.
-* **Defeat:** Getting caught by an AI sentry or running out of energy results in a game over.
+Moving Around: Mouse movements.
+
+Interaction: Press the E key when you are in front of the exit door.
+
+User Interface: On the end-of-game or win screens, the cursor automatically opens for menu navigation.
+
+How to Win?
+After collecting all the batteries and the key, go to the main exit door. Press the E key while looking towards the door. If you've collected all the items, the system will restart and you'll successfully escape.
+
+Project Status: This is my first completed game project. Although it's a small-scale indie game, it forms the foundation of my game development journey.
