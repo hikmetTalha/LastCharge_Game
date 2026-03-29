@@ -156,7 +156,7 @@ public class CharacterMovement : MonoBehaviour
         }
         SFXsource.PlayOneShot(robotDeath);
         yield return new WaitForSeconds(2.5f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("DeathScene");
     }
     private void OnTriggerExit(Collider col)
 

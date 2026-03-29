@@ -20,19 +20,19 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.16464932, g: 0.1665282, b: 0.18867922, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
-  m_DefaultReflectionMode: 0
+  m_DefaultReflectionMode: 1
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
@@ -578,6 +578,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1695028234737283884, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.9
@@ -893,6 +905,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1695028234737283884, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.9
@@ -1928,6 +1952,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1695028234737283884, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.9
@@ -2099,6 +2135,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336383797397280036, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1695028234737283884, guid: 0361366bf70e5cc4197f1ffa2daf5cf6, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.9

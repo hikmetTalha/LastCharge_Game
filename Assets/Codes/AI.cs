@@ -20,10 +20,13 @@ public class AI : MonoBehaviour
     private bool isSearching = false;
     private bool isAttacking = false;
     private Animator anim;
+    public AudioClip StepAudio;
+    public AudioSource audioSRC; 
    
     void Start()
     {
         navMesh = GetComponent<NavMeshAgent>();
+        audioSRC = GetComponent<AudioSource>();
         Target = GameObject.FindWithTag("Player").transform;
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null) Target = playerObj.transform;
@@ -58,6 +61,22 @@ public class AI : MonoBehaviour
     void Update()
     {
         if (Target == null) return;
+        if(navMesh.velocity.magnitude > 0.01f)
+        {
+            if(!audioSRC.isPlaying && StepAudio != null)
+            {
+                audioSRC.clip= StepAudio;
+                audioSRC.loop = true;
+                audioSRC.Play();
+            }
+        }
+        else
+        {
+            if(audioSRC.isPlaying && audioSRC.clip == StepAudio)
+            {
+                audioSRC.Stop();
+            }
+        }
         if (CanSeePlayer())
         {
             currentState = AIState.Chase;
@@ -69,6 +88,7 @@ public class AI : MonoBehaviour
             navMesh.SetDestination(Target.position);
             anim.SetFloat("speed", 1f);
             transform.LookAt(new Vector3(Target.position.x, transform.position.y, Target.position.z));
+
         }
         else
         {
@@ -86,7 +106,7 @@ public class AI : MonoBehaviour
                     StartCoroutine(SearchAndReturn());
                 }
             }
-         else if (currentState == AIState.Patrol)
+            else if (currentState == AIState.Patrol)
             {
                 navMesh.SetDestination(startPosition);
             }

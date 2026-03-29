@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     [SerializeField] float mouseX;
     [SerializeField] float mouseY;
-    [SerializeField] float sensitivity = 400f;
+    [SerializeField] float sensitivity = 300f;
     [SerializeField] Transform player;
     float xRotation = 0f;
     void Start()
